@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://127.0.0.1:3306/mytest?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+        username: root
+        password: root
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        maxOpenPreparedStatements: 20
+    thymeleaf:
+        prefix: classpath:/templates/
+        check-template-location: true
+        suffix: .html
+        encoding: UTF-8
+        mode: HTML5
+        cache: false
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.winterchen.model
+  # configLocation: classpath:/mybatis-config.xml
+
+mapper:
+  mappers:  com.winterchen.dao
+  not-empty: false
+  identity: MYSQL
+
+#pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
