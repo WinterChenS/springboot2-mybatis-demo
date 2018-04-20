@@ -25,17 +25,10 @@ spring:
         poolPreparedStatements: true
         maxPoolPreparedStatementPerConnectionSize: 20
         maxOpenPreparedStatements: 20
-    thymeleaf:
-        prefix: classpath:/templates/
-        check-template-location: true
-        suffix: .html
-        encoding: UTF-8
-        mode: HTML5
-        cache: false
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.winterchen.model
-  # configLocation: classpath:/mybatis-config.xml
 
 mapper:
   mappers:  com.winterchen.dao
