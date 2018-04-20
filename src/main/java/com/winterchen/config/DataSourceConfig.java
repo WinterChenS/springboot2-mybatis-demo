@@ -26,31 +26,15 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataSourceConfig {
 
+
     private static Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
     @Autowired
     private Environment env;
 
-    @Autowired
-    private DataSourceProperties properties;
-
-    /**
-     * 通过Spring JDBC 快速创建 DataSource
-     * 参数格式
-     * spring.datasource.jdbcurl=jdbc:mysql://localhost:3306/mytest
-     * spring.datasource.username=root
-     * spring.datasource.password=root
-     * spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-     *
-     * @return DataSource
-     */
-    @Bean(name = "dataSource")
-    public DataSource DataSource() {
-        return DataSourceBuilder.create().build();
-    }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
         fb.setDataSource(dataSource);
         fb.setTypeAliasesPackage(env.getProperty("mybatis.type-aliases-package"));
