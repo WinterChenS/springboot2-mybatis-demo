@@ -30,8 +30,6 @@ public class UserController {
                     int pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10")
                     int pageSize){
-        //开始分页
-        PageHelper.startPage(pageNum,pageSize);
         return userService.findAllUser(pageNum,pageSize);
     }
 }

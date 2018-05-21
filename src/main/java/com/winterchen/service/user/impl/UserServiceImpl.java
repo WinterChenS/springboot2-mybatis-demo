@@ -1,6 +1,7 @@
 package com.winterchen.service.user.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.winterchen.dao.UserDao;
 import com.winterchen.model.UserDomain;
 import com.winterchen.service.user.UserService;
@@ -31,9 +32,11 @@ public class UserServiceImpl implements UserService {
     * pageSize 每页显示的数据条数
     * */
     @Override
-    public List<UserDomain> findAllUser(int pageNum, int pageSize) {
+    public PageInfo<UserDomain> findAllUser(int pageNum, int pageSize) {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageNum, pageSize);
-        return userDao.selectUsers();
+        List<UserDomain> userDomains = userDao.selectUsers();
+        PageInfo result = new PageInfo(userDomains);
+        return result;
     }
 }
